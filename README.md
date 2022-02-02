@@ -9,8 +9,7 @@ It also can add a context menu handler for the Windows Explorer which makes extr
 
 NEW: This CLI project here is the foundation for the UI version:
 
-**Visit http://upu.derfunk.com/ to get it.**
-![UpuGui](http://upu.derfunk.com/img/upu_app_screen.png "UpuGui")
+You can find under UPU_GUI folder
 
 What's working already?
 ---
