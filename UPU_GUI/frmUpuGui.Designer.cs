@@ -34,12 +34,9 @@
             this.txtPackage = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // btnChoose
             // 
+            this.btnChoose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChoose.Location = new System.Drawing.Point(419, 12);
             this.btnChoose.Name = "btnChoose";
             this.btnChoose.Size = new System.Drawing.Size(29, 23);
@@ -50,6 +47,7 @@
             // 
             // btnUnpack
             // 
+            this.btnUnpack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUnpack.Location = new System.Drawing.Point(338, 41);
             this.btnUnpack.Name = "btnUnpack";
             this.btnUnpack.Size = new System.Drawing.Size(75, 23);
@@ -60,6 +58,8 @@
             // 
             // txtPackage
             // 
+            this.txtPackage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPackage.Location = new System.Drawing.Point(12, 14);
             this.txtPackage.Name = "txtPackage";
             this.txtPackage.ReadOnly = true;

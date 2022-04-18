@@ -52,11 +52,11 @@ namespace UPU_GUI
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = "UpuConsole.exe",
-                UseShellExecute = false,
+                FileName = "UnityPackager.exe",
+                //UseShellExecute = false,
                 CreateNoWindow = true,
-                Arguments = "-i " + "\"" + txtPackage.Text + "\""
-            });
+                Arguments = "unpack " + "\"" + txtPackage.Text + "\" \"" + txtPackage.Text + "_unpacked" + "\""
+            });;
         }
     }
 }

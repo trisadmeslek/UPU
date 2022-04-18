@@ -79,11 +79,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UpuConsole\UpuConsole.csproj">
-      <Project>{669174a5-d539-40f2-8982-3dd2b0207feb}</Project>
-      <Name>UpuConsole</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
