@@ -47,16 +47,33 @@ namespace UPU_GUI
 
         private void btnUnpack_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(txtPackage.Text))
+            if (string.IsNullOrWhiteSpace(txtPackage.Text))
                 return;
+
+            if (cmbChooseEngine.SelectedIndex == 1)
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "UnityPackager\\UnityPackager.exe",
+                    //UseShellExecute = false,
+                    CreateNoWindow = true,
+                    Arguments = "unpack " + "\"" + txtPackage.Text + "\" \"" + txtPackage.Text + "_unpacked" + "\""
+                });
+                return;
+            }
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = "UnityPackager.exe",
+                FileName = "UpuConsole.exe",
                 //UseShellExecute = false,
                 CreateNoWindow = true,
-                Arguments = "unpack " + "\"" + txtPackage.Text + "\" \"" + txtPackage.Text + "_unpacked" + "\""
-            });;
+                Arguments = "-i " + "\"" + txtPackage.Text + "\""
+            });
+        }
+
+        private void frmUpuGui_Load(object sender, EventArgs e)
+        {
+            cmbChooseEngine.SelectedIndex = 0;
         }
     }
 }
