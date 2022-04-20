@@ -28,26 +28,26 @@ namespace UpuConsole
 
             int errorCode = 0;
 
-            try
-            {
+            //try
+            //{
                 upu.Start();
-            }
-            catch (Exception e)
-            {
-                string error = e.ToString();
-                if (e is System.Reflection.ReflectionTypeLoadException)
-                {
-                    var typeLoadException = e as ReflectionTypeLoadException;
-                    var loaderExceptions = typeLoadException.LoaderExceptions;
-                    error += "\n" + loaderExceptions.ToString();
-                }
+            //}
+            //catch (Exception e)
+            //{
+            //    string error = e.ToString();
+            //    if (e is System.Reflection.ReflectionTypeLoadException)
+            //    {
+            //        var typeLoadException = e as ReflectionTypeLoadException;
+            //        var loaderExceptions = typeLoadException.LoaderExceptions;
+            //        error += "\n" + loaderExceptions.ToString();
+            //    }
 
-                Console.WriteLine(error);
+            //    Console.WriteLine(error);
 
-                errorCode = -1;
-                if (Debugger.IsAttached)
-                    Debugger.Break();
-            }
+            //    errorCode = -1;
+            //    if (Debugger.IsAttached)
+            //        Debugger.Break();
+            //}
 
             Environment.Exit(errorCode);
 

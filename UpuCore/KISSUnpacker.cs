@@ -43,7 +43,7 @@ namespace UpuCore
             string f = DecompressGZip(new FileInfo(inputFilepath), tempPath);
 
             string tempContentPath = Path.Combine(tempPath, "content");
-            
+
             ExtractTar(f, tempContentPath);
 
             RemapFiles(tempContentPath, outputPath);
@@ -77,6 +77,7 @@ namespace UpuCore
         /// <param name="remapPath">The remapped path.</param>
         private void RemapFiles(string contentPath, string remapPath)
         {
+            StreamWriter sw = new StreamWriter(remapPath + Path.DirectorySeparatorChar + "log.txt", true);
             foreach (var directoryInfo in new DirectoryInfo(contentPath).GetDirectories())
             {
                 string pathnameFromFile = File.ReadLines(Path.Combine(directoryInfo.FullName, "pathname")).First();
@@ -96,9 +97,41 @@ namespace UpuCore
                 if (File.Exists(assetFilePath) && !File.Exists(targetFilePath))
                 {
                     Console.WriteLine("Extracting file " + targetFilePath + "...");
-                    File.Move(assetFilePath, targetFilePath);
+                    try
+                    {
+                        File.Move(assetFilePath, targetFilePath);
+                    }
+                    catch (System.IO.DirectoryNotFoundException)
+                    {
+                        FileInfo fi = new FileInfo(targetFilePath);
+
+                        for (int i = 0; i < 5; i++)
+                        {
+                            targetFilePath = Path.GetFileNameWithoutExtension(targetFilePath);
+                        }
+
+                        //targetFilePath = targetFilePath.Replace("-", "_");
+                        //targetFilePath = targetFilePath.Replace(",", String.Empty);
+                        //targetFilePath = targetFilePath.Replace("(", String.Empty);
+                        //targetFilePath = targetFilePath.Replace(")", String.Empty);
+                        string newPath = targetPath + Path.DirectorySeparatorChar + targetFilePath;
+                        try
+                        {
+                            File.Move(assetFilePath, newPath);
+                        }
+                        catch (DirectoryNotFoundException)
+                        {
+                            sw.WriteLine(fi.Name + " (" + assetFilePath + ")" + " -> couldn't be written to (" + fi.FullName + ")\r\n");
+                            sw.Flush();
+                            continue;
+                        }
+
+                        sw.WriteLine(fi.Name + " -> " + newPath + "\r\n");
+                        sw.Flush();
+                    }
                 }
             }
+            sw.Close();
         }
 
         /// <summary>
@@ -144,7 +177,7 @@ namespace UpuCore
         public void ExtractTar(String tarFileName, String destFolder)
         {
             Console.WriteLine("Extracting " + tarFileName + " to " + destFolder + "...");
-            
+
             // We have to leave the unpack-directory in order to be able to delete the temp
             // files afterwards again, especially on Windows.
             string formerDir = Directory.GetCurrentDirectory();
